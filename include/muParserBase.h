@@ -82,9 +82,6 @@ namespace mu
 		/** \brief Type used for storing an array of values. */
 		typedef std::vector<value_type> valbuf_type;
 
-		/** \brief Type for a vector of strings. */
-		typedef std::vector<string_type> stringbuf_type;
-
 		/** \brief Typedef for the token reader. */
 		typedef ParserTokenReader token_reader_type;
 
@@ -172,6 +169,7 @@ namespace mu
 		void RemoveVar(const string_type& a_strVarName);
 		const varmap_type& GetUsedVar() const;
 		const varmap_type& GetVar() const;
+		const stringbuf_type& GetStringArgs() const;
 		const valmap_type& GetConst() const;
 		const string_type& GetExpr() const;
 		const funmap_type& GetFunDef() const;

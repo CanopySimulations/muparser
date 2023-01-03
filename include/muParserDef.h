@@ -33,6 +33,7 @@
 #include <string>
 #include <sstream>
 #include <map>
+#include <vector>
 
 #include "muParserFixes.h"
 
@@ -318,6 +319,9 @@ namespace mu
 
 	/** \brief Type for assigning a string name to an index in the internal string table. */
 	typedef std::map<string_type, std::size_t> strmap_type;
+
+	/** \brief Type for a vector of strings. */
+	typedef std::vector<string_type> stringbuf_type;
 
 	// Parser callbacks
 

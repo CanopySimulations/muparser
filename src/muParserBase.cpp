@@ -719,6 +719,13 @@ namespace mu
 	}
 
 	//---------------------------------------------------------------------------
+	/** \brief Return a vector containing parsed string arguments. */
+	const stringbuf_type& ParserBase::GetStringArgs() const
+	{
+		return m_vStringBuf;
+	}
+
+	//---------------------------------------------------------------------------
 	/** \brief Return a map containing all parser constants. */
 	const valmap_type& ParserBase::GetConst() const
 	{
