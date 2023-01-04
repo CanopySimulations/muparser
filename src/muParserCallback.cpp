@@ -833,14 +833,12 @@ namespace mu
 	/** \brief Check that the callback looks valid
 		\throw nothrow
 
-		Check that the function pointer is not null,
-		and if there are user data that they are not null.
+		Check that the function pointer is not null;
+		do not worry about user data.
 	*/
 	bool ParserCallback::IsValid() const
 	{
-		return GetAddr() != nullptr
-			&& !((m_iArgc & CALLBACK_INTERNAL_WITH_USER_DATA)
-			     && GetUserData() == nullptr);
+        return !!GetAddr();
 	}
 
 
