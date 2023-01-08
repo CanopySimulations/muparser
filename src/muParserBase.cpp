@@ -36,7 +36,9 @@
 #include <vector>
 #include <deque>
 #include <sstream>
+#ifdef USE_LOCALE
 #include <locale>
+#endif
 #include <cassert>
 #include <cctype>
 
@@ -59,7 +61,9 @@ using namespace std;
 
 namespace mu
 {
+#if USE_LOCALE
 	std::locale ParserBase::s_locale = std::locale(std::locale::classic(), new change_dec_sep<char_type>('.'));
+#endif
 
 	bool ParserBase::g_DbgDumpCmdCode = false;
 	bool ParserBase::g_DbgDumpStack = false;
@@ -203,8 +207,10 @@ namespace mu
 	*/
 	void ParserBase::SetDecSep(char_type cDecSep)
 	{
+#ifdef USE_LOCALE
 		char_type cThousandsSep = std::use_facet< change_dec_sep<char_type> >(s_locale).thousands_sep();
 		s_locale = std::locale(std::locale("C"), new change_dec_sep<char_type>(cDecSep, cThousandsSep));
+#endif
 	}
 
 	//---------------------------------------------------------------------------
@@ -217,8 +223,10 @@ namespace mu
 	*/
 	void ParserBase::SetThousandsSep(char_type cThousandsSep)
 	{
+#ifdef USE_LOCALE
 		char_type cDecSep = std::use_facet< change_dec_sep<char_type> >(s_locale).decimal_point();
 		s_locale = std::locale(std::locale("C"), new change_dec_sep<char_type>(cDecSep, cThousandsSep));
+#endif
 	}
 
 	//---------------------------------------------------------------------------
@@ -229,8 +237,10 @@ namespace mu
 	*/
 	void ParserBase::ResetLocale()
 	{
+#ifdef USE_LOCALE
 		s_locale = std::locale(std::locale("C"), new change_dec_sep<char_type>('.'));
 		SetArgSep(',');
+#endif
 	}
 
 	//---------------------------------------------------------------------------
@@ -416,9 +426,11 @@ namespace mu
 	*/
 	void ParserBase::SetExpr(const string_type& a_sExpr)
 	{
+#ifdef USE_LOCALE
 		// Check locale compatibility
 		if (m_pTokenReader->GetArgSep() == std::use_facet<numpunct<char_type> >(s_locale).decimal_point())
 			Error(ecLOCALE);
+#endif
 
 		// Check maximum allowed expression length. An arbitrary value small enough so i can debug expressions sent to me
 		if (a_sExpr.length() >= MaxLenExpression)

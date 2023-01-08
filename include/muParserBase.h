@@ -201,7 +201,9 @@ namespace mu
 		virtual void OnDetectVar(string_type* pExpr, int& nStart, int& nEnd);
 
 		static const char_type* c_DefaultOprt[];
+#ifdef USE_LOCALE
 		static std::locale s_locale;  ///< The locale used by the parser
+#endif
 		static bool g_DbgDumpCmdCode;
 		static bool g_DbgDumpStack;
 
